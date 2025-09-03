@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice {{ invoice.invoice_no }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 10px; text-align: left; }
+        h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>GST Invoice</h2>
+    <p><strong>Invoice No:</strong> {{ invoice.invoice_no }}</p>
+    <p><strong>Invoice Date:</strong> {{ invoice.invoice_date }}</p>
+    <p><strong>Razorpay TXN ID:</strong> {{ invoice.razorpay_txn_id }}</p>
+
+    <h3>From:</h3>
+    <p>Numlock IT Solutions<br>
+    GSTIN: [Your GSTIN]</p>
+
+    <h3>To:</h3>
+    <p>{{ invoice.client_name }}<br>
+    {{ invoice.client_address }}<br>
+    GSTIN: {{ invoice.client_gstin or "Unregistered" }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sr. No</th>
+                <th>Description</th>
+                <th>SAC Code</th>
+                <th>Amount (₹)</th>
+                <th>GST %</th>
+                <th>Tax Amount (₹)</th>
+                <th>Total (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Annual SaaS Subscription ({{ invoice.subscription_period }})</td>
+                <td>998431</td>
+                <td>{{ invoice.amount }}</td>
+                <td>{{ invoice.gst_percentage }}%</td>
+                <td>{{ "%.2f"|format(gst_amount) }}</td>
+                <td>{{ "%.2f"|format(total_amount) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>CGST:</strong> ₹{{ "%.2f"|format(cgst) }} &nbsp; | &nbsp;
+       <strong>SGST:</strong> ₹{{ "%.2f"|format(sgst) }}</p>
+    <p><strong>Total Payable:</strong> ₹{{ "%.2f"|format(total_amount) }}</p>
+
+    <p>This is a system-generated GST invoice.</p>
+</body>
+</html>

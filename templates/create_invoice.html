@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create GST Invoice</title>
+</head>
+<body>
+    <h2>Create GST Invoice</h2>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.invoice_no.label }} {{ form.invoice_no }} <br><br>
+        {{ form.invoice_date.label }} {{ form.invoice_date }} <br><br>
+        {{ form.client_name.label }} {{ form.client_name }} <br><br>
+        {{ form.client_address.label }} {{ form.client_address }} <br><br>
+        {{ form.client_gstin.label }} {{ form.client_gstin }} <br><br>
+        {{ form.subscription_period.label }} {{ form.subscription_period }} <br><br>
+        {{ form.amount.label }} {{ form.amount }} <br><br>
+        {{ form.gst_percentage.label }} {{ form.gst_percentage }} <br><br>
+        {{ form.razorpay_txn_id.label }} {{ form.razorpay_txn_id }} <br><br>
+        {{ form.submit }}
+    </form>
+</body>
+</html>
